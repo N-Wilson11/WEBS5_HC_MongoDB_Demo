@@ -7,11 +7,14 @@ var Teacher = mongoose.model('Teacher');
 var Course = mongoose.model('Course');
 
 function getTeachers(req, res){
-	var query = { };
+	var query = {  };
 
+	var result = Teacher.find(query)
+                .populate('courses');
 		//Alternatief
 		// var result = Teacher.find(query);
 		// 
+		result.exec().then((data)=>{res.json(data)});
 		// result.exec((err, data) => {
 		// 	if(err){console.log('err.message: '+err.message)}
 		// 	res.json(data);
@@ -19,7 +22,7 @@ function getTeachers(req, res){
 
 		
 	    //Of gebruik deze verkorte versie. De populate ontbreekt nog. Waar moet deze komen te staan?
-        Teacher.find(query).then((data)=>{res.json(data)})
+        //Teacher.find(query).then((data)=>{res.json(data)})
 
 
 }
@@ -44,6 +47,8 @@ function addTeacher(req, res){
 router.route('/')
 	.get(getTeachers)
 	.post(addTeacher);
+
+	
 
 // Export
 module.exports = router;

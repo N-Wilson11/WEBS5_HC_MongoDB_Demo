@@ -77,5 +77,11 @@ app.use(function(err, req, res, next) {
     });
 });
 
+var PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});
+
+
 
 module.exports = app;
